@@ -23,14 +23,14 @@ function action(mode, type, selection) {
     }
 
     if (status == 0) {
-        cm.sendSimple("Hi there!\r\nWhere would you like to go? \r\n#L0#Free Market#l\r\n#L1#MTS#l\r\n");
+        cm.sendSimple("Hi there!\r\n\r\nWhere would you like to go? \r\n\r\n#L0#Free Market#l\r\n#L1#Henesys#l\r\n");
     } else if(status == 1) {
         if(selection == 0) {
             cm.warp(910000000, 0);
         }
         else if(selection == 1) {
-            cm.sendOk("This is selection 2");
-            cm.dispose();
+            cm.warp(100000000, 0);
         }
+		
     }
 }

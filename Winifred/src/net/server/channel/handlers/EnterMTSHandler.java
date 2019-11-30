@@ -48,11 +48,12 @@ import tools.data.input.SeekableLittleEndianAccessor;
 
 
 public final class EnterMTSHandler extends AbstractMaplePacketHandler {
-    @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+//    @Override
+//    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+//        NPCScriptManager.getInstance().start(c, 9000136, null);
 //        MapleCharacter chr = c.getPlayer();
-        NPCScriptManager.getInstance().start(c, 9000136, null);
-        
+//
+//        
 //        if(!chr.isAlive() && YamlConfig.config.server.USE_BUYBACK_SYSTEM) {
 //            BuybackProcessor.processBuyback(c);
 //            c.announce(MaplePacketCreator.enableActions());
@@ -182,24 +183,23 @@ public final class EnterMTSHandler extends AbstractMaplePacketHandler {
 //            c.announce(MaplePacketCreator.transferInventory(getTransfer(chr.getId())));
 //            c.announce(MaplePacketCreator.notYetSoldInv(getNotYetSold(chr.getId())));
 //        }
-    }
+//    }
     
-    
-//     @Override
-//       public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
-//             if ((c.getPlayer().getMapId() < 910000000) || (c.getPlayer().getMapId() > 910000022)){
-//               c.announce(MaplePacketCreator.serverNotice(5, "Entering Free Market"));
-//               c.getSession().write(MaplePacketCreator.enableActions());
-//               MapleMap freeMarketMap = c.getChannelServer().getMapFactory().getMap(910000000);
-//               c.getPlayer().saveLocation("FREE_MARKET");
-//               MaplePortal portal = freeMarketMap.getPortal("out00");
-//                    c.getPlayer().changeMap(910000000, portal);
-//                    
-//             } else {
-//                  c.announce(MaplePacketCreator.serverNotice(5, "You're already at the Free Market "));
-//               c.getSession().write(MaplePacketCreator.enableActions());
-//             }
-//       }
+     @Override
+       public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+             if ((c.getPlayer().getMapId() < 910000000) || (c.getPlayer().getMapId() > 910000022)){
+               c.announce(MaplePacketCreator.serverNotice(5, "Entering Free Market"));
+               c.getSession().write(MaplePacketCreator.enableActions());
+               MapleMap freeMarketMap = c.getChannelServer().getMapFactory().getMap(910000000);
+               MaplePortal portal = freeMarketMap.getPortal("out00");
+               
+               c.getPlayer().changeMap(910000000, portal);
+                    
+             } else {
+                  c.announce(MaplePacketCreator.serverNotice(5, "You're already at the Free Market "));
+               c.getSession().write(MaplePacketCreator.enableActions());
+             }
+       }
 
     private List<MTSItemInfo> getNotYetSold(int cid) {
         List<MTSItemInfo> items = new ArrayList<>();

@@ -136,8 +136,6 @@ public class MapleMapFactory {
 
     public static MapleMap loadMapFromWz(int mapid, int world, int channel, EventInstanceManager event) {
         MapleMap map;
-        
-        System.out.println(mapid);
         String mapName = getMapName(mapid);
         MapleData mapData = mapSource.getData(mapName);    // source.getData issue with giving nulls in rare ocasions found thanks to MedicOP
         MapleData infoData = mapData.getChildByPath("info");

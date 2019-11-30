@@ -1429,6 +1429,10 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
         MapleMap warpMap;
         EventInstanceManager eim = getEventInstance();
         
+        if(map == 910000000) {
+            client.getPlayer().saveLocation("FREE_MARKET");
+       }
+        
         if (eim != null) {
             warpMap = eim.getMapInstance(map);
         } else {
