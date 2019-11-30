@@ -36,6 +36,7 @@ import client.inventory.Item;
 import client.processor.action.BuybackProcessor;
 import net.AbstractMaplePacketHandler;
 import net.server.Server;
+import scripting.npc.NPCScriptManager;
 import server.MTSItemInfo;
 import server.maps.FieldLimit;
 import server.maps.MapleMap;
@@ -47,18 +48,16 @@ import tools.data.input.SeekableLittleEndianAccessor;
 
 
 public final class EnterMTSHandler extends AbstractMaplePacketHandler {
-//    @Override
-//    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    @Override
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
 //        MapleCharacter chr = c.getPlayer();
-//        
+        NPCScriptManager.getInstance().start(c, 9000136, null);
+        
 //        if(!chr.isAlive() && YamlConfig.config.server.USE_BUYBACK_SYSTEM) {
 //            BuybackProcessor.processBuyback(c);
 //            c.announce(MaplePacketCreator.enableActions());
+//            c.announce(MaplePacketCreator.serverNotice(5, "Yaml buyback"));
 //        } else {
-//            if (!YamlConfig.config.server.USE_MTS) {
-//                c.announce(MaplePacketCreator.enableActions());
-//                return;
-//            }
 //
 //            if(chr.getEventInstance() != null) {
 //                c.announce(MaplePacketCreator.serverNotice(5, "Entering Cash Shop or MTS are disabled when registered on an event."));
@@ -79,10 +78,12 @@ public final class EnterMTSHandler extends AbstractMaplePacketHandler {
 //            }
 //
 //            if (!chr.isAlive()) {
+//                c.announce(MaplePacketCreator.serverNotice(5, "Dede"));
 //                c.announce(MaplePacketCreator.enableActions());
 //                return;
 //            }
 //            if (chr.getLevel() < 10) {
+//                c.announce(MaplePacketCreator.serverNotice(5, "Level"));
 //                c.announce(MaplePacketCreator.blockedMessage2(5));
 //                c.announce(MaplePacketCreator.enableActions());
 //                return;
@@ -181,24 +182,24 @@ public final class EnterMTSHandler extends AbstractMaplePacketHandler {
 //            c.announce(MaplePacketCreator.transferInventory(getTransfer(chr.getId())));
 //            c.announce(MaplePacketCreator.notYetSoldInv(getNotYetSold(chr.getId())));
 //        }
-//    }
+    }
     
     
-     @Override
-       public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
-             if ((c.getPlayer().getMapId() < 910000000) || (c.getPlayer().getMapId() > 910000022)){
-               c.announce(MaplePacketCreator.serverNotice(5, "Entering Free Market"));
-               c.getSession().write(MaplePacketCreator.enableActions());
-               MapleMap freeMarketMap = c.getChannelServer().getMapFactory().getMap(910000000);
-               c.getPlayer().saveLocation("FREE_MARKET");
-               MaplePortal portal = freeMarketMap.getPortal("out00");
-                    c.getPlayer().changeMap(910000000, portal);
-                    
-             } else {
-                  c.announce(MaplePacketCreator.serverNotice(5, "You're already at the Free Market "));
-               c.getSession().write(MaplePacketCreator.enableActions());
-             }
-       }
+//     @Override
+//       public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+//             if ((c.getPlayer().getMapId() < 910000000) || (c.getPlayer().getMapId() > 910000022)){
+//               c.announce(MaplePacketCreator.serverNotice(5, "Entering Free Market"));
+//               c.getSession().write(MaplePacketCreator.enableActions());
+//               MapleMap freeMarketMap = c.getChannelServer().getMapFactory().getMap(910000000);
+//               c.getPlayer().saveLocation("FREE_MARKET");
+//               MaplePortal portal = freeMarketMap.getPortal("out00");
+//                    c.getPlayer().changeMap(910000000, portal);
+//                    
+//             } else {
+//                  c.announce(MaplePacketCreator.serverNotice(5, "You're already at the Free Market "));
+//               c.getSession().write(MaplePacketCreator.enableActions());
+//             }
+//       }
 
     private List<MTSItemInfo> getNotYetSold(int cid) {
         List<MTSItemInfo> items = new ArrayList<>();
