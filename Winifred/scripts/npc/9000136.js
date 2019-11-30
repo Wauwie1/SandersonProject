@@ -23,7 +23,7 @@ function action(mode, type, selection) {
     }
 
     if (status == 0) {
-        cm.sendSimple("Hi there!\r\n\r\nWhere would you like to go? \r\n\r\n#L0#Free Market#l\r\n#L1#Henesys#l\r\n");
+        cm.sendSimple("Hey, it's your agent Sophia!\r\n\r\nOf course I can get you a cab. Where to?\r\n\r\n#L0#Free Market#l\r\n#L1#Henesys#l\r\n#L2#Ellinia#l\r\n#L3#Perion#l\r\n#L4#Kerning City#l\r\n#L5#Nautilus Harbor#l\r\n");
     } else if(status == 1) {
         if(selection == 0) {
             cm.warp(910000000, 0);
@@ -31,6 +31,19 @@ function action(mode, type, selection) {
         else if(selection == 1) {
             cm.warp(100000000, 0);
         }
+        else if(selection == 2) {
+            cm.warp(101000000, 0);
+        }
+		else if(selection == 3) {
+            cm.warp(102000000, 0);
+        }
+		else if(selection == 4) {
+            cm.warp(103000000, 0);
+        }
+		else if(selection == 5) {
+            cm.warp(120000000, 0);
+        }
+		
 		
     }
 }
