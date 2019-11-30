@@ -38,7 +38,9 @@ import net.AbstractMaplePacketHandler;
 import net.server.Server;
 import server.MTSItemInfo;
 import server.maps.FieldLimit;
+import server.maps.MapleMap;
 import server.maps.MapleMiniDungeonInfo;
+import server.maps.MaplePortal;
 import tools.DatabaseConnection;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
@@ -185,11 +187,15 @@ public final class EnterMTSHandler extends AbstractMaplePacketHandler {
      @Override
        public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
              if ((c.getPlayer().getMapId() < 910000000) || (c.getPlayer().getMapId() > 910000022)){
-               c.announce(MaplePacketCreator.serverNotice(5, "Entering MTS "));
+               c.announce(MaplePacketCreator.serverNotice(5, "Entering Free Market"));
                c.getSession().write(MaplePacketCreator.enableActions());
-                    c.getPlayer().changeMap(910000000);
+               MapleMap freeMarketMap = c.getChannelServer().getMapFactory().getMap(910000000);
+               c.getPlayer().saveLocation("FREE_MARKET");
+               MaplePortal portal = freeMarketMap.getPortal("out00");
+                    c.getPlayer().changeMap(910000000, portal);
+                    
              } else {
-                  c.announce(MaplePacketCreator.serverNotice(5, "You're already at MTS "));
+                  c.announce(MaplePacketCreator.serverNotice(5, "You're already at the Free Market "));
                c.getSession().write(MaplePacketCreator.enableActions());
              }
        }
