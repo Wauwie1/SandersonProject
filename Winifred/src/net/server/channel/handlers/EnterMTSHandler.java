@@ -190,6 +190,7 @@ public final class EnterMTSHandler extends AbstractMaplePacketHandler {
              if ((c.getPlayer().getMapId() < 910000000) || (c.getPlayer().getMapId() > 910000022)){
                c.announce(MaplePacketCreator.serverNotice(5, "Entering Free Market"));
                c.getSession().write(MaplePacketCreator.enableActions());
+               c.getPlayer().saveLocation("FREE_MARKET");
                MapleMap freeMarketMap = c.getChannelServer().getMapFactory().getMap(910000000);
                MaplePortal portal = freeMarketMap.getPortal("out00");
                
